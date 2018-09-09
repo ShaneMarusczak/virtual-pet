@@ -3,20 +3,23 @@ package virtualpet;
 import java.util.Random;
 
 public class VirtualPet {
-	public int hunger;
-	public int thirst;
-	public int energyLevel;
-	public int tiredness;
-	public int sick = 0;
 	private Random rand = new Random();
+	public int hunger = rand.nextInt(7)+0;
+	public int thirst = rand.nextInt(7)+0;
+	public int energyLevel = rand.nextInt(7)+0;
+	public int tiredness = rand.nextInt(7)+0;
+	public int sick = 0;
+	
 
 	public void tick() {
-		int randomHunger = rand.nextInt(3) + 0;
-		int randomThirst = rand.nextInt(3) + 0;
+		int randomHunger = rand.nextInt(4) + 0;
+		int randomThirst = rand.nextInt(4) + 0;
 		hunger += randomHunger;
 		thirst += randomThirst;
 		tiredness += 1;
-		energyLevel += 2;
+		if (tiredness < 4) {
+			energyLevel += 2;
+		}
 		isSick();
 	}
 
@@ -31,7 +34,7 @@ public class VirtualPet {
 		tiredness = 0;
 		hunger += 2;
 		thirst += 2;
-		energyLevel += 2;
+		energyLevel += 5;
 	}
 
 	public boolean needsToPlay(int energyLevel) {
@@ -42,9 +45,9 @@ public class VirtualPet {
 	}
 
 	public void playWith() {
-		energyLevel -= 5;
-		tiredness += 2;
-		hunger += 1;
+		energyLevel -= 6;
+		tiredness += 3;
+		hunger += 2;
 		thirst += 2;
 	}
 
@@ -64,11 +67,12 @@ public class VirtualPet {
 
 	public int isSick() {
 		int randomNum = rand.nextInt(21) + 0;
+		int randomNum2 = rand.nextInt(4) + 0;
 		if (randomNum == 1) {
 			sick = 1;
 			return sick;
 		}
-		if (randomNum ==2) {
+		if (randomNum2 == 2) {
 			sick = 0;
 			return sick;
 		}
@@ -92,12 +96,12 @@ public class VirtualPet {
 	}
 
 	public void giveDrink() {
-		thirst -= 6;
+		thirst -= 7;
 		hunger += 1;
 	}
 
 	public void giveFood() {
-		hunger -= 6;
-		thirst += 1;
+		hunger -= 7;
+		thirst += 2;
 	}
 }
