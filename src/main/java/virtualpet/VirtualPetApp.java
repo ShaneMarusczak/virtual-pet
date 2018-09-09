@@ -13,11 +13,6 @@ public class VirtualPetApp {
 		int inputCounter = 0;
 		int runAwayCounter = 0;
 		System.out.println("Welcome!");
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
 		do {
 			System.out.println("Are you ready to take care of very own Virtual Pet? (y/n)");
 			ready = input.nextLine();
@@ -72,23 +67,71 @@ public class VirtualPetApp {
 					}
 				} else {
 					myPet.giveFood();
-					System.out.println(name + " ate everything you gave!");
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+						System.out.println(name + " ate everything you gave!");
+						System.out.println("");
+
+					}
+				}
+			}
+			if (menuInput == 2) {
+				if (!myPet.isThirsty(myPet.thirst)) {
+					System.out.println(name + " is not thirst.");
 					System.out.println("");
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
 					}
+				} else {
+					myPet.giveFood();
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+						System.out.println(name + " drank the whole bowl!");
+						System.out.println("");
+
+					}
+
 				}
-			}
-			if (menuInput == 2) {
-				// giving water
 			}
 			if (menuInput == 3) {
 				// playing
+				if (!myPet.needsToPlay(myPet.energyLevel)) {
+					System.out.println(name + " does not want to play.");
+					System.out.println("");
+				} else {
+					myPet.playWith();
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+						System.out.println(name + " had so much fun playing!");
+						System.out.println("");
+
+					}
+				}
 			}
 			if (menuInput == 4) {
 				// nap
+				if (!myPet.isTired(myPet.tiredness)) {
+					System.out.println(name + " is not sleepy.");
+					System.out.println("");
+				} else {
+					myPet.playWith();
+					try {
+						TimeUnit.SECONDS.sleep(5);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+						System.out.println(name + " had a great nap!");
+						System.out.println("");
+
+					}
+				}
 			}
 			if (menuInput == 5) {
 				System.out.println("Are you sure you want to quit and leave your pet all alone?(y/n)");
@@ -157,6 +200,11 @@ public class VirtualPetApp {
 				runAwayCounter += 1;
 				if (runAwayCounter > 2) {
 					System.out.println("You did not do a good job of taking care of " + name + ".");
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+					}
 					System.out.println(name + " ran away!");
 					System.exit(0);
 				}

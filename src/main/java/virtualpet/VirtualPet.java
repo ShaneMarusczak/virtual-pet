@@ -3,15 +3,15 @@ package virtualpet;
 import java.util.Random;
 
 public class VirtualPet {
-	public static int hunger;
+	public int hunger;
 	public int thirst;
 	public int energyLevel;
 	public int tiredness;
 	private Random rand = new Random();
 
 	public void tick() {
-		int randomHunger = rand.nextInt(5) + 0;
-		int randomThirst = rand.nextInt(5) + 0;
+		int randomHunger = rand.nextInt(3) + 0;
+		int randomThirst = rand.nextInt(3) + 0;
 		hunger += randomHunger;
 		thirst += randomThirst;
 		tiredness += 1;
@@ -33,28 +33,28 @@ public class VirtualPet {
 	}
 
 	public boolean needsToPlay(int energyLevel) {
-		if (energyLevel > 6) {
+		if (energyLevel > 7) {
 			return true;
 		}
 		return false;
 	}
 
 	public void playWith() {
-		energyLevel -= 4;
+		energyLevel -= 5;
 		tiredness += 2;
 		hunger += 1;
 		thirst += 2;
 	}
 
 	public boolean isHungry(int hunger) {
-		if (hunger > 5) {
+		if (hunger > 7) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean isThirsty(int thirst) {
-		if (thirst > 5) {
+		if (thirst > 7) {
 			return true;
 		}
 		return false;
@@ -85,12 +85,12 @@ public class VirtualPet {
 	}
 
 	public void giveDrink() {
-		thirst -= 4;
+		thirst -= 6;
 		hunger += 1;
 	}
 
 	public void giveFood() {
-		hunger -= 1;
+		hunger -= 6;
 		thirst += 1;
 	}
 }
