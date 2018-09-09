@@ -4,43 +4,53 @@ import java.util.Random;
 
 public class VirtualPet {
 	private Random rand = new Random();
-	private int hunger = rand.nextInt(7);
-	private int thirst = rand.nextInt(7);
-	private int energyLevel = rand.nextInt(7);
-	private int tiredness = rand.nextInt(7);
+	private int hunger = rand.nextInt(10);
+	private int thirst = rand.nextInt(10);
+	private int energyLevel = rand.nextInt(5);
+	private int tiredness = rand.nextInt(5);
+	private int happiness = 5;
 	private int sick = 0;
-	
+
 	public int getHunger() {
 		return hunger;
 	}
-	
+
+	public int getHappiness() {
+		return happiness;
+	}
+
 	public int getThirst() {
 		return thirst;
 	}
-	
+
 	public int getEnergyLevel() {
 		return energyLevel;
 	}
-	
+
 	public int getTiredness() {
 		return tiredness;
 	}
-	
+
 	public int getSick() {
 		return sick;
 	}
-	
 
 	public void tick() {
-		int randomHunger = rand.nextInt(4);
-		int randomThirst = rand.nextInt(4);
+		int randomHunger = rand.nextInt(3) + 2;
+		int randomThirst = rand.nextInt(3) + 2;
 		hunger += randomHunger;
 		thirst += randomThirst;
 		tiredness += 1;
 		if (tiredness < 4) {
 			energyLevel += 2;
 		}
-		isSick();
+	}
+
+	public boolean isUnhappy(int happiness) {
+		if (happiness < 3) {
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isTired(int tiredness) {
@@ -51,44 +61,51 @@ public class VirtualPet {
 	}
 
 	public void takeNap() {
-		tiredness = 0;
+		tiredness -= 20;
 		hunger += 2;
 		thirst += 2;
-		energyLevel += 5;
+		energyLevel += 4;
+		happiness += 4;
 	}
 
 	public boolean needsToPlay(int energyLevel) {
-		if (energyLevel > 7) {
+		if (energyLevel > 4) {
 			return true;
 		}
 		return false;
 	}
 
 	public void playWith() {
-		energyLevel -= 6;
+		energyLevel -= 10;
 		tiredness += 3;
-		hunger += 2;
-		thirst += 2;
+		hunger += 1;
+		thirst += 1;
+		happiness += 5;
 	}
 
 	public boolean isHungry(int hunger) {
-		if (hunger > 7) {
+		if (hunger > 8) {
+			happiness -= 1;
 			return true;
 		}
 		return false;
 	}
 
 	public boolean isThirsty(int thirst) {
-		if (thirst > 7) {
+		if (thirst > 5) {
+			happiness -= 1;
+			tiredness += 1;
 			return true;
 		}
 		return false;
 	}
 
 	public int isSick() {
-		int randomNum = rand.nextInt(21);
-		int randomNum2 = rand.nextInt(4);
+		int randomNum = rand.nextInt(8);
+		int randomNum2 = rand.nextInt(3);
 		if (randomNum == 1) {
+			happiness -= 6;
+			tiredness += 3;
 			sick = 1;
 			return sick;
 		}
@@ -98,14 +115,15 @@ public class VirtualPet {
 		}
 		return sick;
 	}
-	
+
 	public void notSick() {
-		sick =0;
+		sick = 0;
 	}
 
 	public boolean needsToGo() {
-		int randomNum = rand.nextInt(9);
+		int randomNum = rand.nextInt(6);
 		if (randomNum == 1) {
+			happiness -= 2;
 			return true;
 		}
 		return false;
@@ -114,18 +132,23 @@ public class VirtualPet {
 	public boolean mightBite() {
 		int randomNum = rand.nextInt(100);
 		if (randomNum == 1) {
+			happiness -= 7;
 			return true;
 		}
 		return false;
 	}
 
 	public void giveDrink() {
-		thirst -= 7;
-		hunger += 1;
+		happiness += 8;
+		thirst -= 20;
+		tiredness += 2;
+		hunger += 2;
 	}
 
 	public void giveFood() {
-		hunger -= 7;
+		happiness += 8;
+		hunger -= 20;
+		tiredness += 2;
 		thirst += 2;
 	}
 }

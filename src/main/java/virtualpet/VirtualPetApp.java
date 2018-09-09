@@ -25,30 +25,27 @@ public class VirtualPetApp {
 				System.out.println("This is a big resonsibility!");
 			}
 		} while (!ready.equals("y"));
-
-		myPet.tick();
-		myPet.tick();
 		myPet.tick();
 		boolean playingGame = true;
 		System.out.println("What would you like to name your pet?");
 		String name = input.nextLine();
-
 		while (playingGame) {
 			do {
-				System.out.println("What would you like to do with " + name + "?");
+				System.out.println("\nWhat would you like to do with " + name + "?");
 				System.out.println("Enter 1 to feed " + name + ".");
 				System.out.println("Enter 2 to give " + name + " a drink.");
 				System.out.println("Enter 3 to play with " + name + ".");
 				System.out.println("Enter 4 to let " + name + " take a nap.");
-				System.out.println("Enter 5 to quit.");
+				System.out.println("Enter 5 to do nothing.");
+				System.out.println("Enter 6 to do quit.");
 				menuInput = input.nextInt();
 				input.nextLine();
 				inputCounter += 1;
+				myPet.tick();
 
-			} while (menuInput != 1 && menuInput != 2 && menuInput != 3 && menuInput != 4 && menuInput != 5);
-
+			} while (menuInput != 1 && menuInput != 2 && menuInput != 3 && menuInput != 4 && menuInput != 5
+					&& menuInput != 6);
 			if (menuInput == 1) {
-				// giving food
 				if (!myPet.isHungry(myPet.getHunger())) {
 					try {
 						TimeUnit.SECONDS.sleep(1);
@@ -57,17 +54,18 @@ public class VirtualPetApp {
 					}
 					System.out.println(name + " is not hungry.");
 					System.out.println("");
-
 				} else {
 					myPet.giveFood();
+					System.out.printf(
+							"    ,    /-.\n   ((___/ __>\n   /      }\n   \\\\ .--.( \n    \\\\   \\\\  /___\\");
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
-						System.out.println(name + " ate everything you gave!");
-						System.out.println("");
-
 					}
+
+					System.out.println("\n" + name + " ate everything you gave!");
+					System.out.println("");
 				}
 			}
 			if (menuInput == 2) {
@@ -79,39 +77,37 @@ public class VirtualPetApp {
 					}
 					System.out.println(name + " is not thirsty.");
 					System.out.println("");
-
 				} else {
 					myPet.giveDrink();
+					System.out.printf(
+							"    ,    /-.\n   ((___/ __>\n   /      }\n   \\\\ .--.( \n    \\\\   \\\\  /___\\\n");
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
-						System.out.println(name + " drank the whole bowl!");
-						System.out.println("");
-
 					}
-
+					System.out.println("\n" + name + " drank the whole bowl!");
+					System.out.println("");
 				}
 			}
 			if (menuInput == 3) {
-				// playing
 				if (!myPet.needsToPlay(myPet.getEnergyLevel())) {
 					System.out.println(name + " does not want to play.");
 					System.out.println("");
 				} else {
 					myPet.playWith();
+					System.out.printf(
+							"             ;~~,__\n:-....,-------'`-'._.'\n`-,,,  ,       ;'~~'\n ,'_,'~.__; '--.\r\n//'       ````(;\r\n`-'\n");
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
-						System.out.println(name + " had so much fun playing!");
+						System.out.println("\n" + name + " had so much fun playing!");
 						System.out.println("");
-
 					}
 				}
 			}
 			if (menuInput == 4) {
-				// nap
 				if (!myPet.isTired(myPet.getTiredness())) {
 					System.out.println(name + " is not sleepy.");
 					System.out.println("");
@@ -126,7 +122,7 @@ public class VirtualPetApp {
 					System.out.println("");
 				}
 			}
-			if (menuInput == 5) {
+			if (menuInput == 6) {
 				System.out.println("Are you sure you want to quit and leave your pet all alone?(y/n)");
 				String willExit = input.nextLine();
 				if (willExit.equals("y")) {
@@ -135,29 +131,31 @@ public class VirtualPetApp {
 				} else {
 					System.out.println("Good! " + name + " will be happy you stayed!");
 				}
-
+			}
+			if (!myPet.isUnhappy(myPet.getHappiness()) && !myPet.isTired(myPet.getTiredness())
+					&& !myPet.isHungry(myPet.getHunger()) && !myPet.isThirsty(myPet.getThirst())
+					&& !myPet.isTired(myPet.getThirst())) {
+				System.out.println(name + " is happy!");
 			}
 			if (inputCounter == 2) {
 				myPet.tick();
 				if (myPet.mightBite()) {
-					System.out.println(name + " just bit you!");
+					System.out.println("\n" + name + " just bit you!");
 				} else if (myPet.getSick() == 1) {
 					while (myPet.getSick() == 1) {
-						System.out.println(name + " is sick.");
+						System.out.println("\n" + name + " is sick.");
 						System.out.println("Take " + name + " to the vet?(y/n)");
 						String takeToVet = input.nextLine();
 						if (takeToVet.equals("y")) {
 							System.out.println(name + " made a full recovery!");
 							myPet.notSick();
-							myPet.tick();
-
 						} else {
-							System.out.println(name + " is very ill, he might get worse.");
-							myPet.tick();
+							System.out.println(name + " is very ill.");
+							myPet.isSick();
 						}
 					}
 				} else if (myPet.needsToGo()) {
-					System.out.println(name + " needs to go outside.");
+					System.out.println("\n" + name + " needs to go outside.");
 					System.out.println("Let " + name + " out?(y/n)");
 					String letOut = input.nextLine();
 					if (letOut.equals("y")) {
@@ -166,37 +164,37 @@ public class VirtualPetApp {
 						System.out.println(name + " had an accident. Better clean it up.");
 						myPet.tick();
 					}
-
 				}
-				inputCounter -= 2;
+				inputCounter = 0;
 			}
 
 			if (myPet.isTired(myPet.getTiredness())) {
-				System.out.println(name + " is getting tired.");
-				if (myPet.getTiredness() > 12) {
+				System.out.println("\n" + name + " is getting tired.");
+				if (myPet.getTiredness() > 13) {
 					System.out.println("VERY TIRED!");
 				}
 			}
 			if (myPet.isHungry(myPet.getHunger())) {
-				System.out.println(name + " is getting hungry.");
-				if (myPet.getHunger() > 12) {
+				System.out.println("\n" + name + " is getting hungry.");
+				if (myPet.getHunger() > 15) {
 					System.out.println("VERY HUNGRY!");
 				}
 			}
 			if (myPet.isThirsty(myPet.getThirst())) {
-				System.out.println(name + " is getting thirsty.");
-				if (myPet.getThirst() > 12) {
+				System.out.println("\n" + name + " is getting thirsty.");
+				if (myPet.getThirst() > 15) {
 					System.out.println("VERY THIRSTY!");
 				}
 			}
 			if (myPet.needsToPlay(myPet.getEnergyLevel())) {
-				System.out.println(name + " would like to play!");
+				System.out.println("\n" + name + " would like to play!");
 				if (myPet.getEnergyLevel() > 12) {
 					System.out.println("PLAY WITH ME NOW!");
 				}
 			}
 			if (myPet.getHunger() > 15 && myPet.getThirst() > 15) {
-				System.out.println(name + " needs to eat and drink now. Be careful, " + name + " might run away soon.");
+				System.out.println(
+						"\n" + name + " needs to eat and drink now. Be careful, " + name + " might run away soon.");
 				runAwayCounter += 1;
 				if (runAwayCounter > 2) {
 					System.out.println("You did not do a good job of taking care of " + name + ".");
@@ -209,7 +207,20 @@ public class VirtualPetApp {
 					System.exit(0);
 				}
 			}
-
+			if (myPet.getHappiness() < 0) {
+				System.out.println("\n" + name + " is getting very unhappy.");
+				runAwayCounter += 1;
+				if (runAwayCounter > 3) {
+					System.out.println("You did not do a good job of taking care of " + name + ".");
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						Thread.currentThread().interrupt();
+					}
+					System.out.println(name + " ran away!");
+					System.exit(0);
+				}
+			}
 		}
 		try {
 			TimeUnit.SECONDS.sleep(1);
