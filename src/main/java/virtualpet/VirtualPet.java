@@ -10,8 +10,8 @@ public class VirtualPet {
 	private Random rand = new Random();
 
 	public void tick() {
-		int randomHunger = rand.nextInt(4) + 0;
-		int randomThirst = rand.nextInt(4) + 0;
+		int randomHunger = rand.nextInt(5) + 0;
+		int randomThirst = rand.nextInt(5) + 0;
 		hunger += randomHunger;
 		thirst += randomThirst;
 		tiredness += 1;
@@ -29,7 +29,7 @@ public class VirtualPet {
 		tiredness = 0;
 		hunger += 2;
 		thirst += 2;
-		energyLevel += 1;
+		energyLevel += 2;
 	}
 
 	public boolean needsToPlay(int energyLevel) {
@@ -41,7 +41,7 @@ public class VirtualPet {
 
 	public void playWith() {
 		energyLevel -= 4;
-		tiredness += 1;
+		tiredness += 2;
 		hunger += 1;
 		thirst += 2;
 	}
