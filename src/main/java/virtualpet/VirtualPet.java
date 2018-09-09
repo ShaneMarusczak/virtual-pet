@@ -7,6 +7,7 @@ public class VirtualPet {
 	public int thirst;
 	public int energyLevel;
 	public int tiredness;
+	public int sick = 0;
 	private Random rand = new Random();
 
 	public void tick() {
@@ -16,6 +17,7 @@ public class VirtualPet {
 		thirst += randomThirst;
 		tiredness += 1;
 		energyLevel += 2;
+		isSick();
 	}
 
 	public boolean isTired(int tiredness) {
@@ -60,16 +62,21 @@ public class VirtualPet {
 		return false;
 	}
 
-	public boolean isSick() {
+	public int isSick() {
 		int randomNum = rand.nextInt(21) + 0;
 		if (randomNum == 1) {
-			return true;
+			sick = 1;
+			return sick;
 		}
-		return false;
+		if (randomNum ==2) {
+			sick = 0;
+			return sick;
+		}
+		return sick;
 	}
 
 	public boolean needsToGo() {
-		int randomNum = rand.nextInt(7) + 0;
+		int randomNum = rand.nextInt(9) + 0;
 		if (randomNum == 1) {
 			return true;
 		}

@@ -18,11 +18,6 @@ public class VirtualPetTest {
 	}
 
 	@Test
-	public void shouldReturnBooleanForSick() {
-		boolean isSick = pet.isSick();
-	}
-
-	@Test
 	public void shouldReturnBooleanForWaste() {
 		boolean needsToGo = pet.needsToGo();
 	}

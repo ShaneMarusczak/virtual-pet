@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class VirtualPetApp {
 	static VirtualPet myPet = new VirtualPet();
-	static Scanner input = new Scanner(System.in);;
+	static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		int menuInput;
@@ -49,22 +49,17 @@ public class VirtualPetApp {
 
 			} while (menuInput != 1 && menuInput != 2 && menuInput != 3 && menuInput != 4 && menuInput != 5);
 
-			try {
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {
-				Thread.currentThread().interrupt();
-			}
-
 			if (menuInput == 1) {
 				// giving food
 				if (!myPet.isHungry(myPet.hunger)) {
-					System.out.println(name + " is not hungry.");
-					System.out.println("");
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
 					}
+					System.out.println(name + " is not hungry.");
+					System.out.println("");
+
 				} else {
 					myPet.giveFood();
 					try {
@@ -79,15 +74,16 @@ public class VirtualPetApp {
 			}
 			if (menuInput == 2) {
 				if (!myPet.isThirsty(myPet.thirst)) {
-					System.out.println(name + " is not thirst.");
-					System.out.println("");
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
 					}
+					System.out.println(name + " is not thirsty.");
+					System.out.println("");
+
 				} else {
-					myPet.giveFood();
+					myPet.giveDrink();
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
@@ -148,14 +144,17 @@ public class VirtualPetApp {
 				myPet.tick();
 				if (myPet.mightBite()) {
 					System.out.println(name + " just bit you!");
-				} else if (myPet.isSick()) {
+				} else if (myPet.sick == 1) {
 					System.out.println(name + " is sick.");
 					System.out.println("Take " + name + " to the vet?(y/n)");
 					String takeToVet = input.nextLine();
 					if (takeToVet.equals("y")) {
 						System.out.println(name + " made a full recovery!");
+						myPet.tick();
+						myPet.sick=0;
 					} else {
 						System.out.println(name + " is very ill, he might get worse.");
+						
 					}
 				} else if (myPet.needsToGo()) {
 					System.out.println(name + " needs to go outside.");
@@ -165,6 +164,7 @@ public class VirtualPetApp {
 						System.out.println(name + " feels much better!");
 					} else {
 						System.out.println(name + " had an accident. Better clean it up.");
+						myPet.tick();
 					}
 
 				}
