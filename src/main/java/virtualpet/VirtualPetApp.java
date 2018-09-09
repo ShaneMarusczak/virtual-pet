@@ -49,7 +49,7 @@ public class VirtualPetApp {
 
 			if (menuInput == 1) {
 				// giving food
-				if (!myPet.isHungry(myPet.hunger)) {
+				if (!myPet.isHungry(myPet.getHunger())) {
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
@@ -71,7 +71,7 @@ public class VirtualPetApp {
 				}
 			}
 			if (menuInput == 2) {
-				if (!myPet.isThirsty(myPet.thirst)) {
+				if (!myPet.isThirsty(myPet.getThirst())) {
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
@@ -95,7 +95,7 @@ public class VirtualPetApp {
 			}
 			if (menuInput == 3) {
 				// playing
-				if (!myPet.needsToPlay(myPet.energyLevel)) {
+				if (!myPet.needsToPlay(myPet.getEnergyLevel())) {
 					System.out.println(name + " does not want to play.");
 					System.out.println("");
 				} else {
@@ -112,7 +112,7 @@ public class VirtualPetApp {
 			}
 			if (menuInput == 4) {
 				// nap
-				if (!myPet.isTired(myPet.tiredness)) {
+				if (!myPet.isTired(myPet.getTiredness())) {
 					System.out.println(name + " is not sleepy.");
 					System.out.println("");
 				} else {
@@ -141,15 +141,16 @@ public class VirtualPetApp {
 				myPet.tick();
 				if (myPet.mightBite()) {
 					System.out.println(name + " just bit you!");
-				} else if (myPet.sick == 1) {
-					while (myPet.sick == 1) {
+				} else if (myPet.getSick() == 1) {
+					while (myPet.getSick() == 1) {
 						System.out.println(name + " is sick.");
 						System.out.println("Take " + name + " to the vet?(y/n)");
 						String takeToVet = input.nextLine();
 						if (takeToVet.equals("y")) {
 							System.out.println(name + " made a full recovery!");
+							myPet.notSick();
 							myPet.tick();
-							myPet.sick = 0;
+
 						} else {
 							System.out.println(name + " is very ill, he might get worse.");
 							myPet.tick();
@@ -170,31 +171,31 @@ public class VirtualPetApp {
 				inputCounter -= 2;
 			}
 
-			if (myPet.isTired(myPet.tiredness)) {
+			if (myPet.isTired(myPet.getTiredness())) {
 				System.out.println(name + " is getting tired.");
-				if (myPet.tiredness > 12) {
+				if (myPet.getTiredness() > 12) {
 					System.out.println("VERY TIRED!");
 				}
 			}
-			if (myPet.isHungry(myPet.hunger)) {
+			if (myPet.isHungry(myPet.getHunger())) {
 				System.out.println(name + " is getting hungry.");
-				if (myPet.hunger > 12) {
+				if (myPet.getHunger() > 12) {
 					System.out.println("VERY HUNGRY!");
 				}
 			}
-			if (myPet.isThirsty(myPet.thirst)) {
+			if (myPet.isThirsty(myPet.getThirst())) {
 				System.out.println(name + " is getting thirsty.");
-				if (myPet.thirst > 12) {
+				if (myPet.getThirst() > 12) {
 					System.out.println("VERY THIRSTY!");
 				}
 			}
-			if (myPet.needsToPlay(myPet.energyLevel)) {
+			if (myPet.needsToPlay(myPet.getEnergyLevel())) {
 				System.out.println(name + " would like to play!");
-				if (myPet.energyLevel > 12) {
+				if (myPet.getEnergyLevel() > 12) {
 					System.out.println("PLAY WITH ME NOW!");
 				}
 			}
-			if (myPet.hunger > 15 && myPet.thirst > 15) {
+			if (myPet.getHunger() > 15 && myPet.getThirst() > 15) {
 				System.out.println(name + " needs to eat and drink now. Be careful, " + name + " might run away soon.");
 				runAwayCounter += 1;
 				if (runAwayCounter > 2) {

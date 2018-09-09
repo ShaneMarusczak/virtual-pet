@@ -4,16 +4,36 @@ import java.util.Random;
 
 public class VirtualPet {
 	private Random rand = new Random();
-	public int hunger = rand.nextInt(7)+0;
-	public int thirst = rand.nextInt(7)+0;
-	public int energyLevel = rand.nextInt(7)+0;
-	public int tiredness = rand.nextInt(7)+0;
-	public int sick = 0;
+	private int hunger = rand.nextInt(7);
+	private int thirst = rand.nextInt(7);
+	private int energyLevel = rand.nextInt(7);
+	private int tiredness = rand.nextInt(7);
+	private int sick = 0;
+	
+	public int getHunger() {
+		return hunger;
+	}
+	
+	public int getThirst() {
+		return thirst;
+	}
+	
+	public int getEnergyLevel() {
+		return energyLevel;
+	}
+	
+	public int getTiredness() {
+		return tiredness;
+	}
+	
+	public int getSick() {
+		return sick;
+	}
 	
 
 	public void tick() {
-		int randomHunger = rand.nextInt(4) + 0;
-		int randomThirst = rand.nextInt(4) + 0;
+		int randomHunger = rand.nextInt(4);
+		int randomThirst = rand.nextInt(4);
 		hunger += randomHunger;
 		thirst += randomThirst;
 		tiredness += 1;
@@ -66,8 +86,8 @@ public class VirtualPet {
 	}
 
 	public int isSick() {
-		int randomNum = rand.nextInt(21) + 0;
-		int randomNum2 = rand.nextInt(4) + 0;
+		int randomNum = rand.nextInt(21);
+		int randomNum2 = rand.nextInt(4);
 		if (randomNum == 1) {
 			sick = 1;
 			return sick;
@@ -78,9 +98,13 @@ public class VirtualPet {
 		}
 		return sick;
 	}
+	
+	public void notSick() {
+		sick =0;
+	}
 
 	public boolean needsToGo() {
-		int randomNum = rand.nextInt(9) + 0;
+		int randomNum = rand.nextInt(9);
 		if (randomNum == 1) {
 			return true;
 		}
@@ -88,8 +112,8 @@ public class VirtualPet {
 	}
 
 	public boolean mightBite() {
-		int randomNum = rand.nextInt(200) + 0;
-		if (randomNum == 100) {
+		int randomNum = rand.nextInt(100);
+		if (randomNum == 1) {
 			return true;
 		}
 		return false;
