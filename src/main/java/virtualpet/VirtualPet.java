@@ -102,14 +102,13 @@ public class VirtualPet {
 
 	public int isSick() {
 		int randomNum = rand.nextInt(8);
-		int randomNum2 = rand.nextInt(3);
 		if (randomNum == 1) {
 			happiness -= 6;
 			tiredness += 3;
 			sick = 1;
 			return sick;
 		}
-		if (randomNum2 == 2) {
+		if (randomNum == 2 || randomNum == 3 || randomNum == 4) {
 			sick = 0;
 			return sick;
 		}
