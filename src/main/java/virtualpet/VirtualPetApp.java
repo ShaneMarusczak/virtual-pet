@@ -202,9 +202,9 @@ public class VirtualPetApp {
 						"\n" + name + " needs to eat and drink now. Be careful, " + name + " might run away soon.");
 				myPet.increaseRunAway();
 				if (myPet.willRunAway()) {
-					System.out.println("You did not do a good job of taking care of " + name + ".");
+					System.out.println("You did not do a good job of taking care of " + name + ".\n\n");
 					try {
-						TimeUnit.SECONDS.sleep(1);
+						TimeUnit.SECONDS.sleep(3);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
 					}
@@ -219,7 +219,7 @@ public class VirtualPetApp {
 				System.out.println("\n" + name + " is getting very unhappy.");
 				myPet.increaseRunAway();
 				if (myPet.willRunAway()) {
-					System.out.println("You did not do a good job of taking care of " + name + ".");
+					System.out.println("You did not do a good job of taking care of " + name + ".\n\n");
 					try {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
