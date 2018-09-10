@@ -103,9 +103,9 @@ public class VirtualPetApp {
 						TimeUnit.SECONDS.sleep(1);
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
-						System.out.println("\n" + name + " had so much fun playing!");
-						System.out.println("");
 					}
+					System.out.println("\n" + name + " had so much fun playing!");
+					System.out.println("");
 				}
 			}
 			if (menuInput == 4) {
@@ -145,7 +145,7 @@ public class VirtualPetApp {
 							" __      _\n \\.'---.//|\n |\\\\./|  \\\\/\n _|.|.|_  \\\n/(  ) ' '  \\\n|  \\/   . |  \\\n\\_/\\__/| |\r\n"
 									+ " V  /V / |\n/__/ /\r\n" + "\\___/\\\r\n");
 					System.out.println("\n" + name + " just bit you!");
-				} else if (myPet.getSick() == 1) {
+				} else if (myPet.isSick()) {
 					while (myPet.getSick() == 1) {
 						System.out.println("\n" + name + " is sick.");
 						System.out.println("Take " + name + " to the vet?(y/n)");
@@ -211,6 +211,9 @@ public class VirtualPetApp {
 					System.out.println(name + " ran away!");
 					System.exit(0);
 				}
+			}
+			if (myPet.getHunger() > 10 && myPet.getEnergyLevel() > 10 && myPet.getHappiness() < 5) {
+				System.out.println(name + " decided to eat your curtains!");
 			}
 			if (myPet.isUnhappy(myPet.getHappiness())) {
 				System.out.println("\n" + name + " is getting very unhappy.");

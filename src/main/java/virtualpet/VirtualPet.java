@@ -120,19 +120,19 @@ public class VirtualPet {
 		return false;
 	}
 
-	public int isSick() {
+	public boolean isSick() {
 		int randomNum = rand.nextInt(8);
 		if (randomNum == 1) {
 			happiness -= 6;
 			tiredness += 3;
 			sick = 1;
-			return sick;
+			return true;
 		}
 		if (randomNum == 2 || randomNum == 3 || randomNum == 4) {
 			sick = 0;
-			return sick;
+			return false;
 		}
-		return sick;
+		return false;
 	}
 
 	public void notSick() {
