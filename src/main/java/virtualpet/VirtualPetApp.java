@@ -139,6 +139,7 @@ public class VirtualPetApp {
 					&& !myPet.isHungry(myPet.getHunger()) && !myPet.isThirsty(myPet.getThirst())
 					&& !myPet.isTired(myPet.getThirst())) {
 				System.out.println(name + " is happy!");
+				runAwayCounter -=1;
 			}
 			if (inputCounter == 2) {
 				myPet.tick();
@@ -179,7 +180,7 @@ public class VirtualPetApp {
 			}
 			if (myPet.isHungry(myPet.getHunger())) {
 				System.out.println("\n" + name + " is getting hungry.");
-				if (myPet.getHunger() > 15) {
+				if (myPet.getHunger() > 17) {
 					System.out.println("VERY HUNGRY!");
 				}
 			}
@@ -199,7 +200,7 @@ public class VirtualPetApp {
 				System.out.println(
 						"\n" + name + " needs to eat and drink now. Be careful, " + name + " might run away soon.");
 				runAwayCounter += 1;
-				if (runAwayCounter > 2) {
+				if (runAwayCounter > 4) {
 					System.out.println("You did not do a good job of taking care of " + name + ".");
 					try {
 						TimeUnit.SECONDS.sleep(1);
@@ -213,7 +214,7 @@ public class VirtualPetApp {
 			if (myPet.getHappiness() < 0) {
 				System.out.println("\n" + name + " is getting very unhappy.");
 				runAwayCounter += 1;
-				if (runAwayCounter > 3) {
+				if (runAwayCounter > 4) {
 					System.out.println("You did not do a good job of taking care of " + name + ".");
 					try {
 						TimeUnit.SECONDS.sleep(1);
