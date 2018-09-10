@@ -157,6 +157,9 @@ public class VirtualPetApp {
 							System.out.println(name + " is very ill.");
 							myPet.tick();
 							myPet.isSick();
+							if (myPet.getSick() == 0) {
+								System.out.println("\n" + name + "'s illness got better.\n");
+							}
 						}
 					}
 				} else if (myPet.needsToGo()) {
