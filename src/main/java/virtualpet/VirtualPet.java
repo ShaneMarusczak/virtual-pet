@@ -36,8 +36,8 @@ public class VirtualPet {
 	}
 
 	public void tick() {
-		int randomHunger = rand.nextInt(3) + 2;
-		int randomThirst = rand.nextInt(3) + 2;
+		int randomHunger = rand.nextInt(3) + 3;
+		int randomThirst = rand.nextInt(3) + 3;
 		hunger += randomHunger;
 		thirst += randomThirst;
 		tiredness += 1;

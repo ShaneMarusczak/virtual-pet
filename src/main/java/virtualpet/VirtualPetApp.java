@@ -122,6 +122,9 @@ public class VirtualPetApp {
 					System.out.println("");
 				}
 			}
+			if (menuInput == 5) {
+				myPet.tick();
+			}
 			if (menuInput == 6) {
 				System.out.println("Are you sure you want to quit and leave your pet all alone?(y/n)");
 				String willExit = input.nextLine();
