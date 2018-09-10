@@ -9,7 +9,12 @@ public class VirtualPet {
 	private int energyLevel = rand.nextInt(5);
 	private int tiredness = rand.nextInt(5);
 	private int happiness = 5;
+	private int runAway = 0;
 	private int sick = 0;
+
+	public int getRunAway() {
+		return runAway;
+	}
 
 	public int getHunger() {
 		return hunger;
@@ -46,8 +51,23 @@ public class VirtualPet {
 		}
 	}
 
+	public void increaseRunAway() {
+		runAway += 1;
+	}
+
+	public void lowerRunAway() {
+		runAway -= 1;
+	}
+
+	public boolean willRunAway() {
+		if (runAway > 2) {
+			return true;
+		}
+		return false;
+	}
+
 	public boolean isUnhappy(int happiness) {
-		if (happiness < 3) {
+		if (happiness < 2) {
 			return true;
 		}
 		return false;

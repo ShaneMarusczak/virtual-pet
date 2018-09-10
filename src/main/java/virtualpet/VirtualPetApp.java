@@ -11,8 +11,9 @@ public class VirtualPetApp {
 		int menuInput;
 		String ready;
 		int inputCounter = 0;
-		int runAwayCounter = 0;
 		System.out.println("Welcome!");
+		System.out.println("               "
+				+ "__\n             /\\\\/'-,\n      ,--'''''   /\"\n ____,'.  )       \\___\n'\"\"\"\"\"------'\"\"\"`-----'");
 		try {
 			TimeUnit.SECONDS.sleep(1);
 		} catch (InterruptedException e) {
@@ -113,6 +114,8 @@ public class VirtualPetApp {
 					System.out.println("");
 				} else {
 					myPet.takeNap();
+					System.out.println("               "
+							+ "__\n             /\\\\/'-,\n      ,--'''''   /\"\n ____,'.  )       \\___\n'\"\"\"\"\"------'\"\"\"`-----'");
 					try {
 						TimeUnit.SECONDS.sleep(5);
 					} catch (InterruptedException e) {
@@ -135,15 +138,12 @@ public class VirtualPetApp {
 					System.out.println("Good! " + name + " will be happy you stayed!");
 				}
 			}
-			if (!myPet.isUnhappy(myPet.getHappiness()) && !myPet.isTired(myPet.getTiredness())
-					&& !myPet.isHungry(myPet.getHunger()) && !myPet.isThirsty(myPet.getThirst())
-					&& !myPet.isTired(myPet.getThirst())) {
-				System.out.println(name + " is happy!");
-				runAwayCounter -=1;
-			}
 			if (inputCounter == 2) {
 				myPet.tick();
 				if (myPet.mightBite()) {
+					System.out.println(
+							" __      _\n \\.'---.//|\n |\\\\./|  \\\\/\n _|.|.|_  \\\n/(  ) ' '  \\\n|  \\/   . |  \\\n\\_/\\__/| |\r\n"
+									+ " V  /V / |\n/__/ /\r\n" + "\\___/\\\r\n");
 					System.out.println("\n" + name + " just bit you!");
 				} else if (myPet.getSick() == 1) {
 					while (myPet.getSick() == 1) {
@@ -155,6 +155,7 @@ public class VirtualPetApp {
 							myPet.notSick();
 						} else {
 							System.out.println(name + " is very ill.");
+							myPet.tick();
 							myPet.isSick();
 						}
 					}
@@ -199,8 +200,8 @@ public class VirtualPetApp {
 			if (myPet.getHunger() > 15 && myPet.getThirst() > 15) {
 				System.out.println(
 						"\n" + name + " needs to eat and drink now. Be careful, " + name + " might run away soon.");
-				runAwayCounter += 1;
-				if (runAwayCounter > 4) {
+				myPet.increaseRunAway();
+				if (myPet.willRunAway()) {
 					System.out.println("You did not do a good job of taking care of " + name + ".");
 					try {
 						TimeUnit.SECONDS.sleep(1);
@@ -211,10 +212,10 @@ public class VirtualPetApp {
 					System.exit(0);
 				}
 			}
-			if (myPet.getHappiness() < 0) {
+			if (myPet.isUnhappy(myPet.getHappiness())) {
 				System.out.println("\n" + name + " is getting very unhappy.");
-				runAwayCounter += 1;
-				if (runAwayCounter > 4) {
+				myPet.increaseRunAway();
+				if (myPet.willRunAway()) {
 					System.out.println("You did not do a good job of taking care of " + name + ".");
 					try {
 						TimeUnit.SECONDS.sleep(1);
@@ -223,6 +224,14 @@ public class VirtualPetApp {
 					}
 					System.out.println(name + " ran away!");
 					System.exit(0);
+				}
+			}
+
+			if (!myPet.isUnhappy(myPet.getHappiness()) && !myPet.isTired(myPet.getTiredness())
+					&& !myPet.isHungry(myPet.getHunger()) && !myPet.isThirsty(myPet.getThirst())) {
+				System.out.println(name + " is happy!");
+				if (myPet.getRunAway() > 0) {
+					myPet.lowerRunAway();
 				}
 			}
 		}
