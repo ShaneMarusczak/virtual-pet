@@ -121,7 +121,7 @@ public class VirtualPet {
 	}
 
 	public boolean isSick() {
-		int randomNum = rand.nextInt(8);
+		int randomNum = rand.nextInt(7);
 		if (randomNum == 1) {
 			happiness -= 6;
 			tiredness += 3;
